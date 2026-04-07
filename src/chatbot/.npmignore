@@ -1,0 +1,45 @@
+# Development files
+.git
+.gitignore
+*.md
+!README.md
+
+# Build artifacts
+.next
+node_modules
+dist
+
+# Config files
+eslint.config.mjs
+next.config.ts
+postcss.config.mjs
+tsconfig.json
+tsup.config.ts
+pnpm-lock.yaml
+pnpm-workspace.yaml
+components.json
+
+# Test files
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+__tests__
+__mocks__
+
+# Editor files
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# App directories (package only includes dist)
+app/
+components/
+lib/
+public/

@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# @your-scope/chat-widget
 
-## Getting Started
+A reusable AI chat widget for Next.js applications with streaming API support.
 
-First, run the development server:
+## Features
+
+- 🚀 Streaming responses support
+- 🎨 Light/Dark theme support
+- 📱 Responsive design
+- 💬 Markdown rendering with GFM support
+- 🔒 Session persistence with localStorage
+- 🎯 Configurable position, size, and styling
+
+## Installation
 
 ```bash
-npm run dev
+npm install @your-scope/chat-widget
 # or
-yarn dev
+yarn add @your-scope/chat-widget
 # or
-pnpm dev
-# or
-bun dev
+pnpm add @your-scope/chat-widget
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Usage
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Basic Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```tsx
+import { ChatWidget } from '@your-scope/chat-widget';
 
-## Learn More
+function App() {
+  return <ChatWidget apiPath="/api/chat" />;
+}
+```
 
-To learn more about Next.js, take a look at the following resources:
+### With Custom Options
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```tsx
+import { ChatWidget } from '@your-scope/chat-widget';
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+function App() {
+  return (
+    <ChatWidget
+      apiPath="/api/chat"
+      title="AI Assistant"
+      subtitle="Ask me anything"
+      placeholder="Type your message..."
+      initialMessage="Hello! How can I help you today?"
+      width={400}
+      height={600}
+      theme="dark"
+      position="bottom-left"
+      zIndex={100}
+    />
+  );
+}
+```
 
-## Deploy on Vercel
+## Props
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Prop             | Type                              | Default                           | Description                        |
+| ---------------- | --------------------------------- | --------------------------------- | ---------------------------------- |
+| `apiPath`        | `string`                          | required                          | The API endpoint for chat requests |
+| `title`          | `string`                          | `"AI Assistant"`                  | Widget header title                |
+| `subtitle`       | `string`                          | `"Ask anything"`                  | Widget header subtitle             |
+| `placeholder`    | `string`                          | `"Type your message..."`          | Input placeholder text             |
+| `initialMessage` | `string`                          | `"Hi! How can I help you today?"` | First message from assistant       |
+| `width`          | `number`                          | `380`                             | Widget panel width in pixels       |
+| `height`         | `number`                          | `640`                             | Widget panel height in pixels      |
+| `theme`          | `"light" \| "dark"`               | `"light"`                         | Color theme                        |
+| `position`       | `"bottom-right" \| "bottom-left"` | `"bottom-right"`                  | Widget position                    |
+| `zIndex`         | `number`                          | `50`                              | CSS z-index for layering           |
+| `className`      | `string`                          | `""`                              | Additional CSS class               |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## API Requirements
+
+The widget expects a GET endpoint that supports streaming responses:
+
+```
+GET /api/chat?prompt={message}&sessionId={uuid}
+```
+
+The endpoint should return a streaming text response (`Content-Type: text/plain`).
+
+## Peer Dependencies
+
+- React 18 or 19
+- React DOM 18 or 19
+- Next.js 14 or 15
+
+## License
+
+MIT
